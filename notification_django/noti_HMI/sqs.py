@@ -1,21 +1,28 @@
 import boto3
-from notification_django.settings import *
+# from notification_sqs.settings import *
 import requests
+import os
 import json
 
 def send_notification_to_sqs(message):
-    # message_body = request.POST.get('message_body')
+
+    try:
+        sqs = boto3.client('sqs',
+                                aws_access_key_id=os.getenv('ACCESS_KEY_ID'),
+                                aws_secret_access_key=os.getenv('SECRET_ACCESS_KEY'),
+                                region_name=os.getenv('REGION_NAME'),)
     
-    sqs = boto3.client('sqs',
-                              aws_access_key_id=AWS_ACCESS_KEY_ID,
-                              aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                              region_name=AWS_REGION_NAME)
 
-    queue_url = AWS_SQS_QUEUE_URL
+        queue_url = os.getenv('SQS_QUEUE_URL')
 
-    response = sqs.send_message(
-        QueueUrl=queue_url,
-        MessageBody=json.dumps(message)
-    )
+        response = sqs.send_message(
+            QueueUrl=queue_url,
+            MessageBody=json.dumps(message)
+        )
 
-    return response
+        return response
+    
+    except Exception as e:
+        # Handle exception
+        print("Error sending message to SQS:", e)
+        return None

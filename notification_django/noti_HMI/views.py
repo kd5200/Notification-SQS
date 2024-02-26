@@ -1,10 +1,15 @@
 from django.shortcuts import render
 
 from django.http import JsonResponse
+
 import boto3
-from .sqs import send_notification_to_sqs
 import requests
 import json
+from django.apps import AppConfig
+from django.db.models.signals import post_migrate
+from django.dispatch import receiver
+from .sqs import send_notification_to_sqs
+import os
 
 
 
@@ -22,6 +27,9 @@ def view(request):
     response = send_notification_to_sqs(notification_message)
 
     return JsonResponse({'status': 'Notification sent to SQS', 'response': response})
+
+
+
 
 # The below "get notifications" function provides logic, 
 # notifications variable being defined as all objects within our notification models.

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'noti_HMI',
 ]
 
 MIDDLEWARE = [
@@ -128,12 +129,12 @@ from dotenv import load_dotenv
 # settings.py
 # Environment variables will be set 
 
-AWS_ACCESS_KEY_ID = os.getenv('ACCESS_KEY_ID'),
-AWS_SECRET_ACCESS_KEY = os.getenv('SECRET_ACCESS_KEY'),
-AWS_REGION_NAME = os.getenv('REGION_NAME'),
+# AWS_ACCESS_KEY_ID = os.getenv('ACCESS_KEY_ID'),
+# AWS_SECRET_ACCESS_KEY = os.getenv('SECRET_ACCESS_KEY'),
+# AWS_REGION_NAME = os.getenv('REGION_NAME'),
 
-# SQS configuration
-AWS_SQS_QUEUE_NAME = os.getenv('SQS_QUEUE_NAME'),
+# # SQS configuration
+# AWS_SQS_QUEUE_NAME = os.getenv('SQS_QUEUE_NAME'),
 
-AWS_SQS_QUEUE_URL = os.getenv('SQS_QUEUE_URL')
+# AWS_SQS_QUEUE_URL = os.getenv('SQS_QUEUE_URL')
 
