@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-# from noti_HMI.sqs import send_notification_to_sqs
+from noti_HMI.views import view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path('/', send_notification_to_sqs, name='send_notification'),
+    path('admin/', admin.site.urls, ),
+    path('', view, name='send_notification'),
 
 ]

@@ -20,7 +20,7 @@ def view(request):
     # Construct your message
     notification_message = {
         'subject': 'Notification Subject',
-        'body': 'App view'
+        'body': 'testing que for HMI'
     }
 
     # Send the notification to SQS
