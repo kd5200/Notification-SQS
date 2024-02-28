@@ -2,11 +2,6 @@ from django.apps import AppConfig
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 from .sqs import send_notification_to_sqs
-import boto3
-# from notification_sqs.settings import *
-import requests
-import os
-import json
 
 
 @receiver(post_migrate, sender=AppConfig)
