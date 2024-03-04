@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from noti_HMI.views import view
+from noti_HMI.views import view, view_redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls, ),
     path('', view, name='send_notification'),
-
+    path('', view_redirect, name='funnel_notification'),
 ]
