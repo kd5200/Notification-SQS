@@ -123,22 +123,21 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# import os
-# from dotenv import load_dotenv
+import boto3
+from dotenv import load_dotenv
+import os
 
-# import dotenv
 
-# dotenv.load_dotenv()
+def send_initialization_message_to_sns_topic():
+    sns = boto3.client('sns', region_name='us-east-1')
 
-# # settings.py
-# # Environment variables will be set 
+    load_dotenv()
 
-# AWS_ACCESS_KEY_ID = os.getenv('ACCESS_KEY_ID'),
-# AWS_SECRET_ACCESS_KEY = os.getenv('SECRET_ACCESS_KEY'),
-# AWS_REGION_NAME = os.getenv('REGION_NAME'),
+    response = sns.publish(
+        TopicArn= os.getenv('TOPIC_ARN'),
+        Message='Django app initialized successfully.'
+    )
 
-# # # SQS configuration
-# AWS_SQS_QUEUE_NAME = os.getenv('SQS_QUEUE_NAME'),
+    print("Initialization message sent to SNS topic.")
 
-# AWS_SQS_QUEUE_URL = os.getenv('SQS_QUEUE_URL')
-
+send_initialization_message_to_sns_topic()
