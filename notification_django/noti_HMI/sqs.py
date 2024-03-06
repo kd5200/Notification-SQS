@@ -37,47 +37,11 @@ def send_notification_to_sqs(message):
         return None
     
 
-def receive_message_from_sqs():
+
+
         
-        load_dotenv()
-
-        # Establishing a connection to Amazon sqs 
-        sqs = boto3.client('sqs', region_name=os.getenv('REGION_NAME'))
-
-        # Capturing the message from from my established sqs queue.
-        response = sqs.receive_message(
-            QueueUrl=os.getenv('SQS_QUEUE_URL'),
-            MaxNumberOfMessages=1,
-            VisibilityTimeout=10,
-            WaitTimeSeconds=0
-        )
-
-        messages = response.get('Messages', [])
 
 
-        # Receive every message within the queue one at a one (basically iterating through the que)
-        for message in messages:
-                # Extract message content
-            message_body = message['test for HMI']
-
-                # Send email
-            send_email(message_body)
-
-        # Delete message from SQS queue after processing
-            sqs.delete_message(
-                QueueUrl=os.getenv('SQS_QUEUE_URL'),
-                ReceiptHandle=message['ReceiptHandle']
-            )
-
-def send_email(message_body):
-    # Send email using Django's email functionality
-    send_mail(
-        'SQS Test',
-        message_body,
-        'kareemdavis18@yahoo.com',
-        ['daviskareem92@gamil.com'],
-        fail_silently=False,
-    )
 
 
 
